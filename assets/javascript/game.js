@@ -14,6 +14,7 @@ $(document).ready(function() {
     var winsText = document.getElementById("wins");
     var lossesText = document.getElementById("losses");
     var guessesText = document.getElementById("guesses");
+    var lettersGuessed = document.getElementById("lettersGuessed");
 
 // Starting the Game with 0 wins, 0 losses and 9 Guesses
     winsText.textContent = "Wins: " + wins;
@@ -29,6 +30,7 @@ $(document).ready(function() {
 
     // save pressed key
         var userGuess = event.key;
+        document.getElementById("lettersGuessed").append(userGuess + " ");
         console.log ("user guess: " + userGuess);
   
         // Compare the guesses
@@ -37,6 +39,8 @@ $(document).ready(function() {
           wins++;
           winsText.textContent = "Wins: " + wins;
           compGuess = letters[Math.floor(Math.random() * letters.length)];
+          lettersGuessed.textContent = "Your Guesses Thus Far: ";
+          guesses === 9;
           console.log ("computer guess win: " + compGuess);
           console.log ("Wins: " + wins);
 
@@ -50,8 +54,9 @@ $(document).ready(function() {
         // when user is out of guesses, they lose and the game resets
         if (guesses === 0) {
             losses++;
-            guesses = 9
+            guesses = 9;
             lossesText.textContent = "Losses: " + losses;
+            lettersGuessed.textContent = "Your Guesses Thus Far: ";
 
             compGuess = letters[Math.floor(Math.random() * letters.length)];
             console.log ("computer guess lose: " + compGuess);
