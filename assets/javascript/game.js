@@ -15,7 +15,7 @@
 $(document).ready(function() {
 
 // Array with all letters of the alphabet for computer to choose from 
-    var letters = ("a", "b", "c", "d", "e", "f", "g", "h", "i", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z");
+    var letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 
 // Variables for scores
     var wins = 0;
@@ -23,6 +23,9 @@ $(document).ready(function() {
     var guesses = 9;
 
     var winsText = document.getElementById("wins");
+    var lossesText = document.getElementById("losses");
+    var guessesText = document.getElementById("guesses");
+
 
     // watch for user to press key
     document.onkeyup = function(event) {
@@ -41,15 +44,18 @@ $(document).ready(function() {
           wins++;
           winsText.textContent = "Wins: " + wins;
           console.log (wins);
+
           // Otherwise, amount of guesses goes down
         } else {
             guesses--;
             console.log (guesses);
             }
+
         // when user is out of guesses, they lose and the game resets
-        if (guesses = 0) {
+        if (guesses === 0) {
             losses++;
             guesses = 9
+            lossesText.textContent = "Losses: " + losses;
         }
         
         }
