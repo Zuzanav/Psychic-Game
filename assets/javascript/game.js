@@ -38,15 +38,20 @@ $(document).ready(function() {
           // Add to Wins
           wins++;
           winsText.textContent = "Wins: " + wins;
+          // computer to pick a new letter
           compGuess = letters[Math.floor(Math.random() * letters.length)];
+          // reset guesses back to 9
+          guesses = 9;
+          guessesText.textContent = "Guesses Left: " + guesses;
+        // reset user's letters guessed
           lettersGuessed.textContent = "Your Guesses Thus Far: ";
-          guesses === 9;
           console.log ("computer guess win: " + compGuess);
           console.log ("Wins: " + wins);
 
           // Otherwise, amount of guesses goes down
         } else {
             guesses--;
+            // display amount of current guesses left
             guessesText.textContent = "Guesses Left: " + guesses;
             console.log ("Guesses left: " + guesses);
             }
@@ -55,21 +60,16 @@ $(document).ready(function() {
         if (guesses === 0) {
             losses++;
             guesses = 9;
+            guessesText.textContent = "Guesses Left: " + guesses;
             lossesText.textContent = "Losses: " + losses;
             lettersGuessed.textContent = "Your Guesses Thus Far: ";
 
             compGuess = letters[Math.floor(Math.random() * letters.length)];
             console.log ("computer guess lose: " + compGuess);
         }
-
-        
         }
-
-
     });
 
 
 
-// if they do not match, the user has 8 guesses left (from 9 guesses)
-// if they do not match and the user has 0 guesses left, then user loses 
-// once the user wins or loses, the game resets and user and start a new game 
+// currently after guessing and then Winning, the guesses does not reset back to 9 
