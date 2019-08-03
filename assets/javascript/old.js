@@ -16,29 +16,12 @@ $(document).ready(function() {
     var guesses = 9;
 
 // Computer chooses a letter, randomly
-    function randomLetter () {
-      let guess = letters[Math.floor(Math.random() * letters.length)]
-        return guess;
-    };
-
-    var compGuess = randomLetter();
+    var compGuess = letters[Math.floor(Math.random() * letters.length)];
     console.log ("computer guess: " + compGuess);
-
-    function resetLetterGuessed () {
-        $('#lettersGuessed').text("Your Guesses Thus Far: ");
-    };
-
-    function guessesLeft (i) {
-        $('#guesses').text('Guesses Left: ' + i);
-    }
-
 //--------------------------------------------------------------------------------------
 
 
 // ON PRESS EVENT =============================================================================
-
-
-
 
 // Watch for user to press a key
     document.onkeyup = function(event) {
@@ -47,9 +30,7 @@ $(document).ready(function() {
         var userGuess = event.key;
         let lettersGuessed = userGuess;
         $("#lettersGuessed").append(lettersGuessed + ',');
-        //$('#guesses').text('Guesses Left: ' + guesses);
-        guessesLeft(guesses);
-
+        $('#guesses').text('Guesses Left: ' + guesses);
         console.log ("user guess: " + lettersGuessed);
         
         // If userGuess is same as compGuess 
@@ -58,37 +39,32 @@ $(document).ready(function() {
           wins++;
           $("#wins").text('Wins: ' + wins);
           // computer to pick a new letter
-          compGuess = randomLetter();
+          compGuess = letters[Math.floor(Math.random() * letters.length)];
           // reset guesses back to 9
           guesses = 9;
+
   
         // reset user's letters guessed
-          resetLetterGuessed();
+          $('lettersGuessed').text("Your Guesses Thus Far: ");
           console.log ("computer guess win: " + compGuess);
           console.log ("Wins: " + wins);
 
           // Otherwise, amount of guesses goes down
         } else {
             guesses--;
-            guessesLeft(guesses);
             // display amount of current guesses left
             console.log ("Guesses left: " + guesses);
-            //$('#guesses').text('Guesses Left: ' + guesses);
             }
 
         // when user is out of guesses, they lose and the game resets
         if (guesses === 0) {
             losses++;
             guesses = 9;
-            resetLetterGuessed();
+            lettersGuessed = '';
             $('#losses').text('Losses: ' + losses);
 
-            compGuess = randomLetter();
+            compGuess = letters[Math.floor(Math.random() * letters.length)];
             console.log ("computer guess lose: " + compGuess);
-        
-            // store userGuess in JSON array and add to guesses thus far 
-            // when there is a new guess, i need a new if/else that checks to see if new guess already is inside that array 
-            // 
         }
         }
     }); 

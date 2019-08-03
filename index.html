@@ -1,26 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- PAGE TITLE -->
     <title>Psychic Game</title>
+
+
+    <!-- LINK TO CSS FILES --------------------------------------------------------------->
     <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="stylesheet" href="assets/css/style.css">
+
+    <!-- LINK TO JQUERY LIBRARY ----------------------------------------------------------->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- LINK TO JAVASCRIPT FILE ---------------------------------------------------------->
     <script type="text/javascript" src="assets/javascript/game.js"></script>
+
+    <!-- LINK TO GOOGLE FONTS -------------------------------------------------------------->
     <link href="https://fonts.googleapis.com/css?family=Quattrocento&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
 
-<h1>The Psychic Game</h1>
-<img src="assets/images/crystal_ball.jpg">
-<p>Guess what letter I am thinking of...</p>
-<p id="wins">Wins: </p>
-<p id="losses">Losses: </p>
-<p id="guesses">Guesses Left: </p>
-<p id="lettersGuessed">Your Guesses Thus Far: </p>
+    <!-- TITLE -->
+    <h1 class="animate"> The Psychic Game</h1>
+
+    <!-- CRYSTAL BALL IMAGE -->
+    <img src="assets/images/crystal_ball.jpg">
+
+    <div id="text-container">
+        <p> Guess what letter I am thinking of...</p>
+        <p id="wins">Wins: </p>
+        <p id="losses">Losses: </p>
+        <p id="guesses">Guesses Left: </p>
+        <p id="lettersGuessed">Your Guesses Thus Far: </p>
+    </div>
 
 </body>
 

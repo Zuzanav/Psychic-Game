@@ -1,3 +1,10 @@
+/* .animate {
+    animation: fadeOut;
+    animation-duration: 4s;
+    animation-delay: 2s;
+    animation-iteration-count: 1;
+  } */
+
 body {
     margin: 20px;
     background-color: black;
