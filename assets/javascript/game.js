@@ -15,6 +15,8 @@ $(document).ready(function() {
     var losses = 0;
     var guesses = 9;
 
+//-------------------------------------------------------------------------
+
 // Computer chooses a letter, randomly
     function randomLetter () {
       let guess = letters[Math.floor(Math.random() * letters.length)]
@@ -24,36 +26,51 @@ $(document).ready(function() {
     var compGuess = randomLetter();
     console.log ("computer guess: " + compGuess);
 
+
     function resetLetterGuessed () {
         $('#lettersGuessed').text("Your Guesses Thus Far: ");
     };
 
+//-------------------------------------------------------------------------
+
+// function to show amount of guesses left 
     function guessesLeft (i) {
         $('#guesses').text('Guesses Left: ' + i);
     }
 
-//--------------------------------------------------------------------------------------
 
 
 // ON PRESS EVENT =============================================================================
 
-
-
-
 // Watch for user to press a key
     document.onkeyup = function(event) {
 
-    // save pressed key
-        var userGuess = event.key;
-        let lettersGuessed = userGuess;
-        $("#lettersGuessed").append(lettersGuessed + ',');
-        //$('#guesses').text('Guesses Left: ' + guesses);
-        guessesLeft(guesses);
+//--------------------------------------------------------------------------------------
 
-        console.log ("user guess: " + lettersGuessed);
+    // save pressed key
+        //var userGuess = event.key;
+        let lettersGuessed = event.key;
+        var regex = /^[A-Za-z]+$/;
+        
+        //Validate TextBox value against the Regex
+        var isValid = regex.test(lettersGuessed);
+        console.log(isValid);
+        
+        if (!isValid || lettersGuessed === 'Enter') {
+            alert("Only letters allowed");
+
+        } else {
+
+            $("#lettersGuessed").append(lettersGuessed + ',');
+            //$('#guesses').text('Guesses Left: ' + guesses);
+            guessesLeft(guesses);
+    
+            console.log ("user guess: " + lettersGuessed);
+        };
+         
         
         // If userGuess is same as compGuess 
-        if (userGuess === compGuess)  {
+        if (lettersGuessed === compGuess)  {
           // Add to Wins
           wins++;
           $("#wins").text('Wins: ' + wins);
@@ -90,5 +107,6 @@ $(document).ready(function() {
             // when there is a new guess, i need a new if/else that checks to see if new guess already is inside that array 
             // 
         }
-        }
+
+        } // end of on keyup function
     }); 
