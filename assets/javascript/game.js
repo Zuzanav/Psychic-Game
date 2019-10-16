@@ -14,11 +14,15 @@ $(document).ready(function() {
     var wins = 0;
     var losses = 0;
     var guesses = 9;
+    var charArray = [];
 
 //-------------------------------------------------------------------------
 
-// Computer chooses a letter, randomly
-    function randomLetter () {
+
+// FUNCTIONS  =====================================================================================
+
+// COMPUTER SELECTS RANDOM LETTER --------------------------
+    function randomLetter() {
       let guess = letters[Math.floor(Math.random() * letters.length)]
         return guess;
     };
@@ -27,86 +31,99 @@ $(document).ready(function() {
     console.log ("computer guess: " + compGuess);
 
 
+// RESET USER GUESS AMOUNT -------------------------------
     function resetLetterGuessed () {
         $('#lettersGuessed').text("Your Guesses Thus Far: ");
     };
 
-//-------------------------------------------------------------------------
 
-// function to show amount of guesses left 
+// DISPLAY USER GUESS AMOUNT -----------------------------
     function guessesLeft (i) {
-        $('#guesses').text('Guesses Left: ' + i);
+        $('#guesses').html('Guesses Left: ' + i);
     }
 
 
+// WINNING ----------------------------------------------
+function winning () {
+    // Add to Wins
+    wins++;
+    $("#wins").text('Wins: ' + wins);
+    // computer to pick a new letter
+    compGuess = randomLetter();
+    // reset guesses back to 9
+    guesses = 9;
+                
+     // reset user's letters guessed
+    resetLetterGuessed();
+    console.log ("computer guess win: " + compGuess);
+    console.log ("Wins: " + wins);
+};
 
-// ON PRESS EVENT =============================================================================
+
+// WRONG GUESS ------------------------------------------
+function wrongGuess() {
+    guesses--;
+    guessesLeft(guesses);
+    // display amount of current guesses left
+    console.log ("Guesses left: " + guesses);
+};
+
+
+// LOSING ----------------------------------------------
+function losing() {
+    losses++;
+    guesses = 9;
+    resetLetterGuessed();
+    $('#losses').text('Losses: ' + losses);
+        
+    compGuess = randomLetter();
+    console.log ("computer guess lose: " + compGuess);
+};
+
+
+// ON PRESS EVENT =================================================================================
 
 // Watch for user to press a key
     document.onkeyup = function(event) {
 
-//--------------------------------------------------------------------------------------
-
     // save pressed key
-        //var userGuess = event.key;
         let lettersGuessed = event.key;
-        var regex = /^[A-Za-z]+$/;
-        
-        //Validate TextBox value against the Regex
-        var isValid = regex.test(lettersGuessed);
-        console.log(isValid);
-        
-        if (!isValid || lettersGuessed === 'Enter') {
-            alert("Only letters allowed");
 
-        } else {
+            // if the keycode of the key pressed does not match parameters, 
+            // let the user know to select a letter only 
+            if ( !(event.keyCode >= 65 && event.keyCode <= 90 ) ) {
+                alert("Please select a letter only.")
 
-            $("#lettersGuessed").append(lettersGuessed + ',');
-            //$('#guesses').text('Guesses Left: ' + guesses);
-            guessesLeft(guesses);
+            } else {
+
+                $("#lettersGuessed").append(lettersGuessed + ', ');
+        
+                console.log ("user guess: " + lettersGuessed);
+
+                charArray.push(event.key)
     
-            console.log ("user guess: " + lettersGuessed);
-        };
-         
+                // If userGuess is same as compGuess 
+                if (lettersGuessed === compGuess)  {
+                    winning();
         
-        // If userGuess is same as compGuess 
-        if (lettersGuessed === compGuess)  {
-          // Add to Wins
-          wins++;
-          $("#wins").text('Wins: ' + wins);
-          // computer to pick a new letter
-          compGuess = randomLetter();
-          // reset guesses back to 9
-          guesses = 9;
-  
-        // reset user's letters guessed
-          resetLetterGuessed();
-          console.log ("computer guess win: " + compGuess);
-          console.log ("Wins: " + wins);
-
-          // Otherwise, amount of guesses goes down
-        } else {
-            guesses--;
-            guessesLeft(guesses);
-            // display amount of current guesses left
-            console.log ("Guesses left: " + guesses);
-            //$('#guesses').text('Guesses Left: ' + guesses);
+                // Otherwise, amount of guesses goes down
+                } else {
+                    wrongGuess();
+                };
+        
+                // when user is out of guesses, they lose and the game resets
+                if (guesses === 0) {
+                    losing();
+                };
             }
-
-        // when user is out of guesses, they lose and the game resets
-        if (guesses === 0) {
-            losses++;
-            guesses = 9;
-            resetLetterGuessed();
-            $('#losses').text('Losses: ' + losses);
-
-            compGuess = randomLetter();
-            console.log ("computer guess lose: " + compGuess);
-        
-            // store userGuess in JSON array and add to guesses thus far 
-            // when there is a new guess, i need a new if/else that checks to see if new guess already is inside that array 
-            // 
-        }
 
         } // end of on keyup function
     }); 
+
+
+    /* 
+
+                    if (charArray.indexOf(event.key) !== -1) {
+                    alert("You already guessed that letter. Select a different one.")
+
+                    */
