@@ -23,13 +23,11 @@ $(document).ready(function() {
 
 // COMPUTER SELECTS RANDOM LETTER --------------------------
     function randomLetter() {
-      let guess = letters[Math.floor(Math.random() * letters.length)]
+        let guess = letters[Math.floor(Math.random() * letters.length)]
         return guess;
     };
 
     var compGuess = randomLetter();
-    console.log ("computer guess: " + compGuess);
-
 
 // RESET USER GUESS AMOUNT -------------------------------
     function resetLetterGuessed () {
@@ -40,8 +38,7 @@ $(document).ready(function() {
 // DISPLAY USER GUESS AMOUNT -----------------------------
     function guessesLeft (i) {
         $('#guesses').html('Guesses Left: ' + i);
-    }
-
+    };
 
 // WINNING ----------------------------------------------
 function winning () {
@@ -52,21 +49,17 @@ function winning () {
     compGuess = randomLetter();
     // reset guesses back to 9
     guesses = 9;
-    charArray.length = 0;
-                
+    charArray.length = 0;    
      // reset user's letters guessed
     resetLetterGuessed();
-    console.log ("computer guess win: " + compGuess);
-    console.log ("Wins: " + wins);
 };
 
 
 // WRONG GUESS ------------------------------------------
 function wrongGuess() {
     guesses--;
-    guessesLeft(guesses);
     // display amount of current guesses left
-    console.log ("Guesses left: " + guesses);
+    guessesLeft(guesses);
 };
 
 
@@ -77,13 +70,10 @@ function losing() {
     resetLetterGuessed();
     charArray.length = 0;
     $('#losses').text('Losses: ' + losses);
-        
     compGuess = randomLetter();
-    console.log ("computer guess lose: " + compGuess);
 };
 
 //===============================================================================================
-
 
 // ON PRESS EVENT =================================================================================
 
@@ -128,4 +118,5 @@ function losing() {
                 }
             }
         } // end of on keyup function
+        
     });  // end document ready function
