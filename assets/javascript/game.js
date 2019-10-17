@@ -52,6 +52,7 @@ function winning () {
     compGuess = randomLetter();
     // reset guesses back to 9
     guesses = 9;
+    charArray.length = 0;
                 
      // reset user's letters guessed
     resetLetterGuessed();
@@ -74,11 +75,14 @@ function losing() {
     losses++;
     guesses = 9;
     resetLetterGuessed();
+    charArray.length = 0;
     $('#losses').text('Losses: ' + losses);
         
     compGuess = randomLetter();
     console.log ("computer guess lose: " + compGuess);
 };
+
+//===============================================================================================
 
 
 // ON PRESS EVENT =================================================================================
@@ -89,41 +93,39 @@ function losing() {
     // save pressed key
         let lettersGuessed = event.key;
 
-            // if the keycode of the key pressed does not match parameters, 
-            // let the user know to select a letter only 
+            // WRONG KEY
+            // if the keycode of the key pressed does not match parameters, let the user know to select a letter only 
             if ( !(event.keyCode >= 65 && event.keyCode <= 90 ) ) {
                 alert("Please select a letter only.")
 
             } else {
 
-                $("#lettersGuessed").append(lettersGuessed + ', ');
-        
-                console.log ("user guess: " + lettersGuessed);
-
-                charArray.push(event.key)
-    
-                // If userGuess is same as compGuess 
-                if (lettersGuessed === compGuess)  {
-                    winning();
-        
-                // Otherwise, amount of guesses goes down
-                } else {
-                    wrongGuess();
-                };
-        
-                // when user is out of guesses, they lose and the game resets
-                if (guesses === 0) {
-                    losing();
-                };
-            }
-
-        } // end of on keyup function
-    }); 
-
-
-    /* 
-
-                    if (charArray.indexOf(event.key) !== -1) {
+                if (charArray.indexOf(event.key) !== -1) { 
                     alert("You already guessed that letter. Select a different one.")
 
-                    */
+                } else {
+                    // add guessed letter to display
+                    $("#lettersGuessed").append(lettersGuessed + ', ');
+                            
+                    console.log ("user guess: " + lettersGuessed);
+
+                    // add guessed letter to array
+                    charArray.push(event.key)
+                    
+                    // USER WIN 
+                    if (lettersGuessed === compGuess)  {
+                        winning();
+
+                    // USER GUESSES WRONG
+                    } else {
+                        wrongGuess();
+                    };
+
+                    // USER LOSES 
+                    if (guesses === 0) {
+                        losing();
+                    };
+                }
+            }
+        } // end of on keyup function
+    });  // end document ready function
