@@ -1,6 +1,9 @@
 # Psychic-Game
 _______________________________________________________
 
+## Link to Game
+[click here to start playing](https://zuzanav.github.io/Psychic-Game/)
+
 ## Description
 Psychic-Game is a fun, simple game where you have to correctly guess the letter the mysterious crystal ball has randomly chosen!
 
